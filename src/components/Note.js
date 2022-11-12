@@ -4,34 +4,46 @@ import '../App.css';
 
 export const Note = () => {
     const [text, setText] = React.useState("");
-    const [editOn, setEditOn] = React.useState(false)
+    const [editOn, setEditOn] = React.useState(false);
+    const [important, setImportant] = React.useState(false);
 
     const [active, setActive] = React.useState(false);
 
 
-    const handleClick = () => {
+    const handleClick = () => { //reveals edit and mark completed buttons
         setActive(!active)
     }
 
-    const editText = (e) => {
+    const editText = (e) => { //stores existing textbox text in state
       console.log(e.target.previousElementSibling.innerText)
       setText(e.target.previousElementSibling.innerText)
       setEditOn(!editOn)
+    }
+
+    const saveText = (e) => { //saves text
+      console.log(e.target.previousElementSibling.previousElementSibling.value) 
+      setText(e.target.previousElementSibling.previousElementSibling.value)
+      setActive(false)
+      setEditOn(false)
     }
 
     const cancelEdit = () => {
       setActive(false)
       setEditOn(false)
     }
+
+    const flipImportant = () => {
+      setImportant(!important)
+    }
   return (
-    <div className="container note-normal">
-        <h2 className="mb-4">This is what a note would look like</h2>
-        {!editOn && <p onClick={handleClick}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>}
+    <div className={`container note mb-4 pt-4 pb-4 roundedDrop ${important && "important"}`} onClick={handleClick}>
+        {!editOn && <p className={`${important && "heavy"}`}>{text || "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}</p>}
         {editOn && <div>
-          <textarea className="form-control" value={text}></textarea>
+          <textarea id="textBox" className={`form-control mb-4 ${important && "heavy"}`}>{text}</textarea>
           <button className="btn btn-danger">Delete Item</button>
-          <button className="btn btn-success">Save</button>
+          <button className="btn btn-success" onClick={saveText}>Save</button>
           <button className="btn btn-warning" onClick={cancelEdit}>Cancel</button>
+          <button className="btn btn-primary" onClick={flipImportant}>Mark Important</button>
           </div>}
         {active && !editOn && <button className="btn btn-info" onClick={editText} label="Edit">Edit</button>}
     </div>

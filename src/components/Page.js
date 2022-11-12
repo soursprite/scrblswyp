@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button } from './Button'
 import { Note } from './Note'
+import '../App.css'
 
 export const Page = (props) => {
 
@@ -12,7 +13,7 @@ export const Page = (props) => {
     }
 
   return (
-    <div className="container page-normal">
+    <div className="container page">
         {notes}
     <Button className="btn btn-info" label="Add Note" onClick={addNote}></Button>
     </div>
