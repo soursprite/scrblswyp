@@ -32,6 +32,7 @@ export const RegisterModal = ({ setShowModal }) => {
                 Close
             </button>
             <div className="modalContent">
+                <h1>Register your account</h1>
                 <form>
                 <div class="form-group">
                     <label for="username">Username</label>

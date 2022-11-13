@@ -11,6 +11,15 @@ function App() {
   const [showModal, setShowModal] = useState(false);
 
   const loginAccount = () => {
+    axios({
+      method: "get",
+      data: {
+        username: loginUsername,
+        password: loginPassword
+      },
+      withCredentials: true,
+      url: "https://localhost:3000/login"
+    })
 
   }
   const getUser = () => {
