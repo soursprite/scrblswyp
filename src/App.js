@@ -23,6 +23,7 @@ function App() {
 
   }
   const getUser = () => {
+    console.log(res.user)
 
   }
   return (
